@@ -11,17 +11,17 @@ import (
 )
 
 func SendToLLM(ctx context.Context, input string) (string, error) {
-	llm, err := openai.New()
-    if err != nil {
-        log.Fatal(err)
-    }
+	llm, err := openai.New(openai.WithModel("gpt-4o-mini"))
+	if err != nil {
+		log.Fatal(err)
+	}
 	fmt.Println(input)
-    completion, err := llm.Call(ctx, input,
-        llms.WithTemperature(0.8),
-    )
-    if err != nil {
-        log.Fatal(err)
-    }
+	completion, err := llm.Call(ctx, input,
+		llms.WithTemperature(0.8),
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	return completion, nil
 }
